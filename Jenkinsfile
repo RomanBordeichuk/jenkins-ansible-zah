@@ -13,16 +13,20 @@ pipeline{
                 sh "ls -la ~/.ssh/"
             }
         }
-        
+
         stage("Pull image from DockerHub"){
             steps{
-                sh "ansible-playbook -i inventory.ini docker_pull.yml"
+                withCredentials([string(credentialsId: 'worder-sudo-pass', variable: 'SUDO_PASS')]){
+                    sh "ansible-playbook -i inventory.ini docker_pull.yml -e 'ansible_become_password=${SUDO_PASS}'"
+                }
             }
         }
 
         stage("Deploy"){
             steps{
-                sh "ansible-playbook -i inventory.ini docker_deploy.yml"
+                withCredentials([string(credentialsId: 'worder-sudo-pass', variable: 'SUDO_PASS')]){
+                    sh "ansible-playbook -i inventory.ini docker_deploy.yml -e 'ansible_become_password=${SUDO_PASS}'"
+                }
             }
         }
     }
