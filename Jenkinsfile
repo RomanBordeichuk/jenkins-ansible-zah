@@ -4,14 +4,14 @@ pipeline{
     stages{
         stage("Pull image from DockerHub"){
             steps{
-                sh "docker pull romanbordei4yk/jenkins-pipeline-lab-bordeichuk:latest"
+                sh "ansible-playbook -i inventory.ini docker_pull.yml"
             }
         }
 
-        // stage("Deploy"){
-        //     steps{
-                
-        //     }
-        // }
+        stage("Deploy"){
+            steps{
+                sh "ansible-playbook -i inventory.ini docker_deploy.yml"
+            }
+        }
     }
 }

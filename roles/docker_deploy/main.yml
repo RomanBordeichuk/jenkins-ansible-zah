@@ -1,0 +1,8 @@
+- name: Run the Docker container
+  community.docker.docker_container:
+    name: "my-app-container"
+    image: "romanbordei4yk/jenkins-pipeline-lab-bordeichuk:latest"
+    state: started
+    restart_policy: always
+    published_ports:
+      - "80:80"

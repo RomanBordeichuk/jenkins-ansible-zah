@@ -1,0 +1,5 @@
+- name: Pull image from DockerHub
+  community.docker.docker_image:
+    name: "romanbordei4yk/jenkins-pipeline-lab-bordeichuk"
+    source: pull
+    tag: latest
