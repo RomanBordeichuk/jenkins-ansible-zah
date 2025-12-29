@@ -16,7 +16,7 @@ pipeline{
 
         stage("Pull image from DockerHub"){
             steps{
-                withCredentials([string(credentialsId: 'worker-sudo-pass', password: 'SUDO_PASS')]){
+                withCredentials([usernamePassword(credentialsId: 'worker-sudo-pass', usernameVariable: 'SUDO_USER' passwordVariable: 'SUDO_PASS')]){
                     sh "ansible-playbook -i inventory.ini docker_pull.yml -e 'ansible_become_password=${SUDO_PASS}'"
                 }
             }
@@ -24,7 +24,7 @@ pipeline{
 
         stage("Deploy"){
             steps{
-                withCredentials([string(credentialsId: 'worker-sudo-pass', password: 'SUDO_PASS')]){
+                withCredentials([usernamePassword(credentialsId: 'worker-sudo-pass', usernameVariable: 'SUDO_USER' passwordVariable: 'SUDO_PASS')]){
                     sh "ansible-playbook -i inventory.ini docker_deploy.yml -e 'ansible_become_password=${SUDO_PASS}'"
                 }
             }
