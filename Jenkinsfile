@@ -5,6 +5,14 @@ pipeline{
         ANSIBLE_HOST_KEY_CHECKING = false
     }
 
+    stage("Debug Info") {
+        steps {
+            sh "whoami"
+            sh "pwd"
+            sh "ls -la ~/.ssh/"
+        }
+    }
+
     stages{
         stage("Pull image from DockerHub"){
             steps{
