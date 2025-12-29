@@ -3,3 +3,4 @@
     name: "romanbordei4yk/jenkins-pipeline-lab-bordeichuk"
     source: pull
     tag: latest
+    force_source: true
