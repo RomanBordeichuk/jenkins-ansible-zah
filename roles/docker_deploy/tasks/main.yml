@@ -1,3 +1,8 @@
+- name: Ensure old container is stopped and removed
+  community.docker.docker_container:
+    name: "my-app-container"
+    state: absent
+
 - name: Run the Docker container
   community.docker.docker_container:
     name: "my-app-container"
@@ -5,4 +10,4 @@
     state: started
     restart_policy: always
     published_ports:
-      - "80:80"
+      - "81:80"
